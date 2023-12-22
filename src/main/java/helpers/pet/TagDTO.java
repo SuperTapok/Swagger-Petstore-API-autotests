@@ -1,13 +1,11 @@
-package pet.model;
-import com.fasterxml.jackson.annotation.JsonProperty;
+package helpers.pet;
+
 import lombok.Builder;
 import lombok.extern.jackson.Jacksonized;
 
 @Jacksonized
 @Builder
-public class Category {
-    @JsonProperty
+public class TagDTO {
     public int id;
-    @JsonProperty
     public String name;
 }

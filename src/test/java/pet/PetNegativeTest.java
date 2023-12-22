@@ -1,7 +1,11 @@
 package pet;
 
-import helper.PetsHelper;
+import helpers.PetsHelper;
+import helpers.Settings;
+import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
 import io.restassured.module.jsv.JsonSchemaValidator;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -9,30 +13,38 @@ import java.io.File;
 
 import static org.apache.http.HttpStatus.*;
 
-public class PetNegativeTest extends BaseTest{
+@Feature("Pet")
+public class PetNegativeTest extends Settings {
     @ParameterizedTest
-    @CsvFileSource(resources = "test_data/Negative/GetPetData.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = GET_PET_NEGATIVE)
+    @DisplayName("GET " + PET + " code " + SC_NOT_FOUND)
+    @Description("Поиск питомца с невалидным id")
     void getPetTest (String id) {
         PetsHelper.getPetTest(id)
-                .statusCode(SC_NOT_FOUND)
-                .body(JsonSchemaValidator
-                        .matchesJsonSchemaInClasspath("pet/Schemes/BasicResponseScheme.json"));
+            .statusCode(SC_NOT_FOUND)
+            .body(JsonSchemaValidator
+                    .matchesJsonSchemaInClasspath(BASIC_RESPONSE));
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "test_data/Negative/PostUploadImageData.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = POST_UPLOAD_IMAGE_NEGATIVE)
+    @DisplayName("POST " + PET + "{}" + UPLOAD_IMAGE + " code " + SC_UNSUPPORTED_MEDIA_TYPE)
+    @Description("Загрузка файлов других форматов вместо изображений для питомца")
     public void postUploadImageTest (Integer id, String fileName) {
         PetsHelper.postUploadImageTest(id, new File(fileName))
-                .statusCode(SC_UNSUPPORTED_MEDIA_TYPE)
-                .body(JsonSchemaValidator
-                .matchesJsonSchemaInClasspath("pet/Schemes/BasicResponseScheme.json"));
+            .statusCode(SC_UNSUPPORTED_MEDIA_TYPE)
+            .body(JsonSchemaValidator
+                .matchesJsonSchemaInClasspath(BASIC_RESPONSE));
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "test_data/Negative/GetFindByStatusData.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = GET_FIND_BY_STATUS_NEGATIVE)
+    @DisplayName("GET " + PET + FIND_BY_STATUS + " code " + SC_OK)
+    @Description("Поиск питомцев с невалидными статусами")
     void getFindByStatusTest (String status) {
-        PetsHelper.getFindByStatus(status).statusCode(SC_OK)
-                .body(JsonSchemaValidator
-                        .matchesJsonSchemaInClasspath("pet/Schemes/FindByStatusScheme.json"));
+        PetsHelper.getFindByStatus(status)
+            .statusCode(SC_OK)
+            .body(JsonSchemaValidator
+                .matchesJsonSchemaInClasspath(ARRAY_OF_PETS));
     }
 }

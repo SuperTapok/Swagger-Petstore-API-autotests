@@ -1,5 +1,5 @@
-package pet.model;
-import com.fasterxml.jackson.annotation.JsonProperty;
+package helpers.pet;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,17 +11,11 @@ import java.util.ArrayList;
 @Builder
 @Setter
 @Getter
-public class Pet {
-    @JsonProperty()
+public class PetDTO {
     Integer id;
-    @JsonProperty()
-    Category category;
-    @JsonProperty()
+    CategoryDTO category;
     String name;
-    @JsonProperty()
     ArrayList<String> photoUrls;
-    @JsonProperty()
-    ArrayList<Tag> tags;
-    @JsonProperty()
+    ArrayList<TagDTO> tags;
     String status;
 }
