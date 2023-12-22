@@ -31,8 +31,7 @@ public class PetPositiveTest extends Settings {
 
         PetsHelper.postPetResponse(pet)
             .statusCode(SC_OK)
-            .body(JsonSchemaValidator
-                .matchesJsonSchemaInClasspath(PET_SCHEME));
+            .body(JsonSchemaValidator.matchesJsonSchemaInClasspath(PET_SCHEME));
     }
 
     @Order(2)
@@ -45,32 +44,29 @@ public class PetPositiveTest extends Settings {
 
         PetsHelper.putPetResponse(pet)
             .statusCode(SC_OK)
-            .body(JsonSchemaValidator
-                .matchesJsonSchemaInClasspath(PET_SCHEME));
+            .body(JsonSchemaValidator.matchesJsonSchemaInClasspath(PET_SCHEME));
     }
 
     @Order(3)
     @ParameterizedTest
     @CsvFileSource(resources = POST_UPLOAD_IMAGE_POSITIVE)
-    @DisplayName("POST " + PET + "{}" + UPLOAD_IMAGE + " code " + SC_OK)
+    @DisplayName("POST " +  UPLOAD_IMAGE + " code " + SC_OK)
     @Description("Загрузка изображений для питомца")
     public void postUploadImageTest (Integer id, String fileName) {
         PetsHelper.postUploadImageTest(id, new File(fileName))
             .statusCode(SC_OK)
-            .body(JsonSchemaValidator
-                .matchesJsonSchemaInClasspath(BASIC_RESPONSE));
+            .body(JsonSchemaValidator.matchesJsonSchemaInClasspath(BASIC_RESPONSE));
     }
 
     @Order(4)
     @ParameterizedTest
     @CsvFileSource(resources = GET_PET_POSITIVE)
-    @DisplayName("GET " + PET + "/{} code " + SC_OK)
+    @DisplayName("GET " + PET_ID + " code " + SC_OK)
     @Description("Поиск питомца по валидному id")
     void getPetTest (String id) {
         PetsHelper.getPetTest(id)
             .statusCode(SC_OK)
-            .body(JsonSchemaValidator
-                .matchesJsonSchemaInClasspath(PET_SCHEME));
+            .body(JsonSchemaValidator.matchesJsonSchemaInClasspath(PET_SCHEME));
     }
 
     @Order(5)
@@ -80,31 +76,28 @@ public class PetPositiveTest extends Settings {
     @Description("Поиск и фильтрация питомцев по валидному статусу")
     void getFindByStatusTest (String status) {
         PetsHelper.getFindByStatus(status).statusCode(SC_OK)
-            .body(JsonSchemaValidator
-                .matchesJsonSchemaInClasspath(ARRAY_OF_PETS));
+            .body(JsonSchemaValidator.matchesJsonSchemaInClasspath(ARRAY_OF_PETS));
     }
 
     @Order(6)
     @ParameterizedTest
     @CsvFileSource(resources = POST_PET_WITH_FORM_DATA_POSITIVE)
-    @DisplayName("POST " + PET + "/{} code " + SC_OK)
+    @DisplayName("POST " + PET_ID + " code " + SC_OK)
     @Description("Обновление питомца валидными данными формы")
     void postUpdatePetByFormDataTest (Integer id, String name, String status) {
         PetsHelper.postUpdatePetByFormDataTest(id, name, status)
             .statusCode(SC_OK)
-            .body(JsonSchemaValidator
-                    .matchesJsonSchemaInClasspath(BASIC_RESPONSE));
+            .body(JsonSchemaValidator.matchesJsonSchemaInClasspath(BASIC_RESPONSE));
     }
 
     @Order(7)
     @ParameterizedTest
     @CsvFileSource(resources = DELETE_PET_POSITIVE)
-    @DisplayName("DELETE " + PET + "/{} code " + SC_OK)
+    @DisplayName("DELETE " + PET_ID + " code " + SC_OK)
     @Description("Удаление питомца по существующему id")
     void deletePetTest (Integer id) {
         PetsHelper.deletePetTest(id)
             .statusCode(SC_OK)
-            .body(JsonSchemaValidator
-                .matchesJsonSchemaInClasspath(BASIC_RESPONSE));
+            .body(JsonSchemaValidator.matchesJsonSchemaInClasspath(BASIC_RESPONSE));
     }
 }

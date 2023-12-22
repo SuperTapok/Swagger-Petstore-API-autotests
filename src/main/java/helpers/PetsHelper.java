@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
 
 public class PetsHelper extends Settings {
 
@@ -41,8 +40,9 @@ public class PetsHelper extends Settings {
             given()
                 .contentType(ContentType.MULTIPART)
                 .multiPart("file", file)
+                .pathParam("petId", id)
             .when()
-                .post(PET + "/" + id.toString() + UPLOAD_IMAGE)
+                .post(UPLOAD_IMAGE)
             .then()
                 .log().ifValidationFails(LogDetail.ALL);
     }
@@ -51,8 +51,9 @@ public class PetsHelper extends Settings {
         return
             given()
                 .header("api_key", "special-key")
+                .pathParam("petId", id)
             .when()
-                .get(PET + "/" + id)
+                .get(PET_ID)
             .then()
                 .log().ifValidationFails(LogDetail.ALL);
     }
@@ -73,16 +74,19 @@ public class PetsHelper extends Settings {
                 .contentType(ContentType.URLENC)
                 .formParam("name", name)
                 .formParam("status", status)
+                .pathParam("petId", id)
             .when()
-                .post(PET + "/" + id.toString())
+                .post(PET_ID)
             .then()
                 .log().ifValidationFails(LogDetail.ALL);
     }
 
     public static ValidatableResponse deletePetTest (Integer id) {
         return
-            when()
-                .delete(PET + "/" + id.toString())
+            given()
+                .pathParam("petId", id)
+            .when()
+                .delete(PET_ID)
             .then()
                 .log().ifValidationFails(LogDetail.ALL);
     }

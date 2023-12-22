@@ -17,7 +17,7 @@ import static org.apache.http.HttpStatus.*;
 public class PetNegativeTest extends Settings {
     @ParameterizedTest
     @CsvFileSource(resources = GET_PET_NEGATIVE)
-    @DisplayName("GET " + PET + " code " + SC_NOT_FOUND)
+    @DisplayName("GET " + PET_ID + " code " + SC_NOT_FOUND)
     @Description("Поиск питомца с невалидным id")
     void getPetTest (String id) {
         PetsHelper.getPetTest(id)
@@ -28,7 +28,7 @@ public class PetNegativeTest extends Settings {
 
     @ParameterizedTest
     @CsvFileSource(resources = POST_UPLOAD_IMAGE_NEGATIVE)
-    @DisplayName("POST " + PET + "{}" + UPLOAD_IMAGE + " code " + SC_UNSUPPORTED_MEDIA_TYPE)
+    @DisplayName("POST " + UPLOAD_IMAGE + " code " + SC_UNSUPPORTED_MEDIA_TYPE)
     @Description("Загрузка файлов других форматов вместо изображений для питомца")
     public void postUploadImageTest (Integer id, String fileName) {
         PetsHelper.postUploadImageTest(id, new File(fileName))
@@ -39,7 +39,7 @@ public class PetNegativeTest extends Settings {
 
     @ParameterizedTest
     @CsvFileSource(resources = GET_FIND_BY_STATUS_NEGATIVE)
-    @DisplayName("GET " + PET + FIND_BY_STATUS + " code " + SC_OK)
+    @DisplayName("GET " + FIND_BY_STATUS + " code " + SC_OK)
     @Description("Поиск питомцев с невалидными статусами")
     void getFindByStatusTest (String status) {
         PetsHelper.getFindByStatus(status)
