@@ -1,4 +1,6 @@
-package helpers.pet;
+package helpers;
+import models.pet.PetDTO;
+
 import java.util.ArrayList;
 
 public class PetBuilder {

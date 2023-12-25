@@ -1,6 +1,6 @@
 package helpers;
 
-import helpers.pet.PetDTO;
+import models.pet.PetDTO;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;

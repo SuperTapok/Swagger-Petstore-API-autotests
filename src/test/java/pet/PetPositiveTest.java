@@ -2,8 +2,8 @@ package pet;
 
 import helpers.PetsHelper;
 import helpers.Settings;
-import helpers.pet.PetBuilder;
-import helpers.pet.PetDTO;
+import helpers.PetBuilder;
+import models.pet.PetDTO;
 import io.qameta.allure.Description;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import org.junit.jupiter.api.DisplayName;
