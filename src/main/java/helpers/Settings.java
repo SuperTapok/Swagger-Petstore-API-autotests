@@ -23,7 +23,8 @@ public class Settings implements Constants.Endpoints, Constants.Schemes,
                                              params;
     protected static LinkedHashMap<String, Object> queryParams;
     private static final AllureRestAssured ALLURE_REQUEST_RESPONSE_TEMPLATE = new AllureRestAssured()
-        .setRequestTemplate("http-request.ftl").setResponseTemplate("http-response.ftl");
+        .setRequestTemplate("http-request.ftl")
+        .setResponseTemplate("http-response.ftl");
 
     @BeforeAll
     public static void setup() {

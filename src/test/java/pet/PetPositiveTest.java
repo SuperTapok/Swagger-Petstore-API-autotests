@@ -75,7 +75,8 @@ public class PetPositiveTest extends Settings {
     @DisplayName("GET " + FIND_BY_STATUS + " code " + SC_OK)
     @Description("Поиск и фильтрация питомцев по валидному статусу")
     void getFindByStatusTest (String status) {
-        PetsHelper.getFindByStatus(status).statusCode(SC_OK)
+        PetsHelper.getFindByStatus(status)
+            .statusCode(SC_OK)
             .body(JsonSchemaValidator.matchesJsonSchemaInClasspath(ARRAY_OF_PETS));
     }
 

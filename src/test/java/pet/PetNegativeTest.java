@@ -22,8 +22,7 @@ public class PetNegativeTest extends Settings {
     void getPetTest (String id) {
         PetsHelper.getPetTest(id)
             .statusCode(SC_NOT_FOUND)
-            .body(JsonSchemaValidator
-                    .matchesJsonSchemaInClasspath(BASIC_RESPONSE));
+            .body(JsonSchemaValidator.matchesJsonSchemaInClasspath(BASIC_RESPONSE));
     }
 
     @ParameterizedTest
@@ -33,8 +32,7 @@ public class PetNegativeTest extends Settings {
     public void postUploadImageTest (Integer id, String fileName) {
         PetsHelper.postUploadImageTest(id, new File(fileName))
             .statusCode(SC_UNSUPPORTED_MEDIA_TYPE)
-            .body(JsonSchemaValidator
-                .matchesJsonSchemaInClasspath(BASIC_RESPONSE));
+            .body(JsonSchemaValidator.matchesJsonSchemaInClasspath(BASIC_RESPONSE));
     }
 
     @ParameterizedTest
@@ -44,7 +42,6 @@ public class PetNegativeTest extends Settings {
     void getFindByStatusTest (String status) {
         PetsHelper.getFindByStatus(status)
             .statusCode(SC_OK)
-            .body(JsonSchemaValidator
-                .matchesJsonSchemaInClasspath(ARRAY_OF_PETS));
+            .body(JsonSchemaValidator.matchesJsonSchemaInClasspath(ARRAY_OF_PETS));
     }
 }

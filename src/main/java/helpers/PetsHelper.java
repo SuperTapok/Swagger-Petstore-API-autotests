@@ -32,7 +32,7 @@ public class PetsHelper extends Settings {
             .when()
                 .put(PET)
             .then()
-                .log().body();
+                .log().ifValidationFails(LogDetail.ALL);
     }
 
     public static ValidatableResponse postUploadImageTest(Integer id, File file) {
@@ -65,7 +65,7 @@ public class PetsHelper extends Settings {
             .when()
                 .get(FIND_BY_STATUS)
             .then()
-                .log().all();
+                .log().ifValidationFails(LogDetail.ALL);
     }
 
     public static ValidatableResponse postUpdatePetByFormDataTest (Integer id, String name, String status) {
